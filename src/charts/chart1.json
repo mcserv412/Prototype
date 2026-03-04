@@ -1,0 +1,13 @@
+{
+    "bpm":60,
+    "offset" : 0,
+    "duration" : 5000,
+    "chart": [
+        {"timestamp":1000, "mode": "4k", "notes":{"1": "start", "2": "start", "4": "start"}},
+        {"timestamp":1500, "mode": "4k", "notes":{"1": "end", "4": "end", "3" : "start"}},
+        {"timestamp":2000, "mode": "4k", "notes":{"1": "start", "2": "end", "3": "end"}},
+        {"timestamp":3000, "mode": "4k", "notes":{"1": "end"}},
+        {"timestamp":4000, "mode": "7k", "notes":{"1": "start", "2": "start", "3":"start", "4": "start"}}
+    ]
+}
+
