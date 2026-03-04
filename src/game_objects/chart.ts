@@ -1,6 +1,7 @@
 import Note from "./note"
 import TimeStamps from "./timestamp"
 import type Game from "../game"
+import type Key from "./key"
 
 type ChartTimeStamp = {
     timestamp: number
@@ -34,21 +35,37 @@ export default class Chart{
     charts!:ChartTimeStamp[]
     game!:Game
     curCharIdx!:number
+    keys!:Key[]
 
-    constructor(game: Game){
+    constructor(game: Game, keys : Key[]){
         this.notes = []
         this.timestamp = new TimeStamps()
         this.timestamp.startTime()
         this.game = game
         this.charts = []
         this.curCharIdx = 0
+        this.keys = keys
 
     }
     update() {
         this.timestamp.update()
         
         while (this.curCharIdx < this.charts.length && this.timestamp.time >= this.charts[this.curCharIdx].timestamp) {
-            const initial = 200
+            const initial = 300
+            if(this.charts[this.curCharIdx].mode === '4k'){
+                const arr = [1, 4, 7]
+                this.keys.forEach((key) => {
+                    if (arr.includes(key.num)) {
+                        key.hideKey()
+                    }else{
+                        key.showKey()
+                    }
+                })
+            }else if(this.charts[this.curCharIdx].mode === '7k'){
+                this.keys.forEach(key => {
+                    key.showKey()
+                })
+            }
             Object.keys(this.charts[this.curCharIdx].resetkey).forEach((resetkey) => {
                 if (resetkey == "1") {
                     this.notes.push(new Note(this.game, 100, 20, initial + 0, 0, "red"))
